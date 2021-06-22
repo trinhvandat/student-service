@@ -13,7 +13,7 @@ public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private  String name;
@@ -38,7 +38,7 @@ public class Student implements Serializable {
         this.dob = dob;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -76,6 +76,14 @@ public class Student implements Serializable {
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+    public  static Student setValues (Student student, Student studentReq) {
+        student.setName(studentReq.getName());
+        student.setCode(studentReq.getCode());
+        student.setAddress(studentReq.getAddress());
+        student.setDob(studentReq.getDob());
+        return  student;
     }
 
     @Override

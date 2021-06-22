@@ -25,13 +25,7 @@ public class StudentServiceIml implements StudentService {
     @Override
     public Student updateStudent(int studentID, Student studentReq) {
         return studentRepository.findById(studentID)
-                .map(student -> {
-                    student.setName(studentReq.getName());
-                    student.setCode(studentReq.getCode());
-                    student.setAddress(studentReq.getAddress());
-                    student.setDob(studentReq.getDob());
-                    return  student;
-                })
+                .map(student -> Student.setValues(student, studentReq))
                 .map(studentRepository::save)
                 .orElse(null);
     }
