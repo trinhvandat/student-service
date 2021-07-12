@@ -1,6 +1,7 @@
 package org.aibless.backendjava.studentservice.service.iml;
 
 import org.aibless.backendjava.studentservice.dto.StudentDTO;
+import org.aibless.backendjava.studentservice.exception.StudentNotFoundException;
 import org.aibless.backendjava.studentservice.model.Student;
 import org.aibless.backendjava.studentservice.repository.StudentRepository;
 import org.aibless.backendjava.studentservice.service.StudentService;
@@ -28,7 +29,7 @@ public class StudentServiceIml implements StudentService {
     }
 
     public Student getByID(int Id) {
-        return studentRepository.findById(Id);
+        return studentRepository.findById(Id).orElseThrow(StudentNotFoundException::new);
     }
     @Override
     public StudentDTO updateStudent(int studentID, StudentDTO studentDTO) {
@@ -55,7 +56,7 @@ public class StudentServiceIml implements StudentService {
 
     @Override
     public StudentDTO getStudentById(int id) {
-        Student student = studentRepository.getById(id);
+        Student student = studentRepository.findById(id).orElseThrow(StudentNotFoundException::new);
         return convertToDTO(student);
     }
 
@@ -71,7 +72,7 @@ public class StudentServiceIml implements StudentService {
 
     @Override
     public StudentDTO getStudentByCode(String code) {
-        Student student = studentRepository.findByCode(code);
+        Student student = studentRepository.findByCode(code).orElseThrow(StudentNotFoundException::new);
         return  convertToDTO(student);
     }
 
@@ -97,7 +98,6 @@ public class StudentServiceIml implements StudentService {
 
     private  Student convertToEntity(StudentDTO studentDTO){
         Student student = new Student();
-        //student.setId(studentDTO.getId());
         student.setName(studentDTO.getName());
         student.setCode(studentDTO.getCode());
         student.setAddress(studentDTO.getAddress());

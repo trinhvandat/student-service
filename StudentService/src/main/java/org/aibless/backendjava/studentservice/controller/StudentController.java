@@ -18,7 +18,7 @@ public class StudentController {
     private  final StudentService studentService;
 
     @Autowired
-    public  StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
@@ -29,25 +29,16 @@ public class StudentController {
     }
 
     @PutMapping("/{student_id}")
-    public  ResponseEntity<StudentDTO> updateStudent(@PathVariable("student_id") int studentId, @RequestBody StudentDTO studentDTO) {
+    public  ResponseEntity<StudentDTO> updateStudent(@PathVariable("student_id") int studentId,
+                                                     @RequestBody StudentDTO studentDTO) {
         final StudentDTO updatedStudent = studentService.updateStudent(studentId, studentDTO);
-        if (updatedStudent == null) {
-            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return  new ResponseEntity<>(updatedStudent, HttpStatus.OK);
-        }
+        return  new ResponseEntity<>(updatedStudent, HttpStatus.OK);
     }
 
     @DeleteMapping("/{student_id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable("student_id") int studentId) {
-        final Student deletedStudent = studentService.deleteStudent(studentId);
-        if (deletedStudent == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+        studentService.deleteStudent(studentId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping
@@ -56,58 +47,33 @@ public class StudentController {
         return  new ResponseEntity<>(students, HttpStatus.OK);
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable ("id") int id) {
         StudentDTO studentDTO = studentService.getStudentById(id);
-        if(studentDTO == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return  new ResponseEntity<>(studentDTO, HttpStatus.OK);
-        }
+        return  new ResponseEntity<>(studentDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/name/{name}")
-    public  ResponseEntity<?> getByName(@PathVariable("name") String character) {
-        List<StudentDTO> studentDTOList = studentService.getStudentByName(character);
-        if(studentDTOList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
-        }
+    @GetMapping(params = {"name"})
+    public  ResponseEntity<?> getByName(@RequestParam("name") String name) {
+        List<StudentDTO> studentDTOList = studentService.getStudentByName(name);
+        return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
     }
 
-    @GetMapping("/code/{code}")
-    public ResponseEntity<?> getByCode(@PathVariable("code") String code) {
+    @GetMapping(params = {"code"})
+    public ResponseEntity<?> getByCode(@RequestParam("code") String code) {
         StudentDTO studentDTO = studentService.getStudentByCode(code);
-        if(studentDTO == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return  new ResponseEntity<>(studentDTO, HttpStatus.OK);
-        }
+        return  new ResponseEntity<>(studentDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/address/{address}")
-    public  ResponseEntity<?> getByAddress(@PathVariable("address") String address) {
+    @GetMapping(params = "address")
+    public  ResponseEntity<?> getByAddress(@RequestParam("address") String address) {
         final List<StudentDTO> studentDTOList =studentService.getStudentByAddress(address);
-        if(studentDTOList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
-        }
+        return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
     }
 
-    @GetMapping("/dob/{dob}")
-    public ResponseEntity<?> getByDob(@PathVariable("dob") Date date) {
-        final List<StudentDTO> studentDTOList = studentService.getStudentByDob(date);
-        if(studentDTOList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        else {
-            return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
-        }
+    @GetMapping(params = "dob")
+    public ResponseEntity<?> getByDob(@RequestParam("dob") Date dob) {
+        final List<StudentDTO> studentDTOList = studentService.getStudentByDob(dob);
+        return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
     }
  }
