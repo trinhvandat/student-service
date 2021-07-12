@@ -48,31 +48,31 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable ("id") int id) {
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable ("id") int id) {
         StudentDTO studentDTO = studentService.getStudentById(id);
         return  new ResponseEntity<>(studentDTO, HttpStatus.OK);
     }
 
     @GetMapping(params = {"name"})
-    public  ResponseEntity<?> getByName(@RequestParam("name") String name) {
+    public  ResponseEntity<List<StudentDTO>> getStudentByName(@RequestParam("name") String name) {
         List<StudentDTO> studentDTOList = studentService.getStudentByName(name);
         return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
     }
 
     @GetMapping(params = {"code"})
-    public ResponseEntity<?> getByCode(@RequestParam("code") String code) {
+    public ResponseEntity<StudentDTO> getStudentByCode(@RequestParam("code") String code) {
         StudentDTO studentDTO = studentService.getStudentByCode(code);
         return  new ResponseEntity<>(studentDTO, HttpStatus.OK);
     }
 
     @GetMapping(params = "address")
-    public  ResponseEntity<?> getByAddress(@RequestParam("address") String address) {
+    public  ResponseEntity<List<StudentDTO>> getStudentByAddress(@RequestParam("address") String address) {
         final List<StudentDTO> studentDTOList =studentService.getStudentByAddress(address);
         return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
     }
 
     @GetMapping(params = "dob")
-    public ResponseEntity<?> getByDob(@RequestParam("dob") Date dob) {
+    public ResponseEntity<List<StudentDTO>> getStudentByDob(@RequestParam("dob") Date dob) {
         final List<StudentDTO> studentDTOList = studentService.getStudentByDob(dob);
         return  new ResponseEntity<>(studentDTOList, HttpStatus.OK);
     }
