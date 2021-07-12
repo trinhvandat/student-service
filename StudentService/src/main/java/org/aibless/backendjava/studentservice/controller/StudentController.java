@@ -58,7 +58,7 @@ public class StudentController {
 
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getById(@PathVariable ("id") int id) {
-        StudentDTO studentDTO = studentService.getById(id);
+        StudentDTO studentDTO = studentService.getStudentById(id);
         if(studentDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -69,7 +69,7 @@ public class StudentController {
 
     @GetMapping("/name/{name}")
     public  ResponseEntity<?> getByName(@PathVariable("name") String character) {
-        List<StudentDTO> studentDTOList = studentService.getByName(character);
+        List<StudentDTO> studentDTOList = studentService.getStudentByName(character);
         if(studentDTOList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -80,7 +80,7 @@ public class StudentController {
 
     @GetMapping("/code/{code}")
     public ResponseEntity<?> getByCode(@PathVariable("code") String code) {
-        StudentDTO studentDTO = studentService.getByCode(code);
+        StudentDTO studentDTO = studentService.getStudentByCode(code);
         if(studentDTO == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -91,7 +91,7 @@ public class StudentController {
 
     @GetMapping("/address/{address}")
     public  ResponseEntity<?> getByAddress(@PathVariable("address") String address) {
-        final List<StudentDTO> studentDTOList =studentService.getByAddress(address);
+        final List<StudentDTO> studentDTOList =studentService.getStudentByAddress(address);
         if(studentDTOList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -102,7 +102,7 @@ public class StudentController {
 
     @GetMapping("/dob/{dob}")
     public ResponseEntity<?> getByDob(@PathVariable("dob") Date date) {
-        final List<StudentDTO> studentDTOList = studentService.getByDob(date);
+        final List<StudentDTO> studentDTOList = studentService.getStudentByDob(date);
         if(studentDTOList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

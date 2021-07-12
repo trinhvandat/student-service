@@ -16,14 +16,14 @@ public interface StudentService {
 
     List<Student> listStudent();
 
-    StudentDTO getById( int id);
+    StudentDTO getStudentById( int id);
 
-    List<StudentDTO> getByName(String c);
+    List<StudentDTO> getStudentByName(String c);
 
-    StudentDTO getByCode(String code);
+    StudentDTO getStudentByCode(String code);
 
-    List<StudentDTO> getByAddress(String address);
+    List<StudentDTO> getStudentByAddress(String address);
 
-    List<StudentDTO> getByDob(Date date);
+    List<StudentDTO> getStudentByDob(Date date);
 
 }

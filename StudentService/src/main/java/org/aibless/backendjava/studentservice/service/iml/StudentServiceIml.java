@@ -54,13 +54,13 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
-    public StudentDTO getById(int id) {
+    public StudentDTO getStudentById(int id) {
         Student student = studentRepository.getById(id);
         return convertToDTO(student);
     }
 
     @Override
-    public List<StudentDTO> getByName(String c) {
+    public List<StudentDTO> getStudentByName(String c) {
         List<Student> studentList = studentRepository.findByName(c);
         List<StudentDTO> studentDTOList = new ArrayList<>();
         for (Student s:studentList) {
@@ -70,13 +70,13 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
-    public StudentDTO getByCode(String code) {
+    public StudentDTO getStudentByCode(String code) {
         Student student = studentRepository.findByCode(code);
         return  convertToDTO(student);
     }
 
     @Override
-    public List<StudentDTO> getByAddress(String address) {
+    public List<StudentDTO> getStudentByAddress(String address) {
         List<Student> studentList = studentRepository.findByAddress(address);
         List<StudentDTO> studentDTOList = new ArrayList<>();
         for (Student s:studentList) {
@@ -86,7 +86,7 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
-    public List<StudentDTO> getByDob(Date date) {
+    public List<StudentDTO> getStudentByDob(Date date) {
         List<Student> studentList = studentRepository.findByDob(date);
         List<StudentDTO> studentDTOList = new ArrayList<>();
         for (Student s:studentList) {
