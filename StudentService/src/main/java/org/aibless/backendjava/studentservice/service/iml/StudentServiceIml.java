@@ -32,13 +32,13 @@ public class StudentServiceIml implements StudentService {
         return convertToDTO(studentRepository.save(student));
     }
 
-    public Student getByID(int Id) {
+    public Student getById(int Id) {
         return studentRepository.findById(Id).orElseThrow(StudentNotFoundException::new);
     }
     @Override
     public StudentDTO updateStudent(int studentID, StudentDTO studentDTO) {
         Student studentReq = convertToEntity(studentDTO);
-        Student student = getByID(studentID);
+        Student student = getById(studentID);
         student.setName(studentReq.getName());
         student.setCode(studentReq.getCode());
         student.setAddress(studentReq.getAddress());
@@ -48,7 +48,7 @@ public class StudentServiceIml implements StudentService {
 
     @Override
     public Student deleteStudent(int studentID) {
-        Student student = getByID(studentID);
+        Student student = getById(studentID);
         studentRepository.delete(student);
         return student;
     }
