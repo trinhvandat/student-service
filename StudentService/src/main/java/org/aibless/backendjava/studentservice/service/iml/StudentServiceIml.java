@@ -6,6 +6,8 @@ import org.aibless.backendjava.studentservice.model.Student;
 import org.aibless.backendjava.studentservice.repository.StudentRepository;
 import org.aibless.backendjava.studentservice.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -23,6 +25,7 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
+    @Cacheable(value = "students")
     public StudentDTO createStudent(StudentDTO studentDTO) {
         Student student = convertToEntity(studentDTO);
         return convertToDTO(studentRepository.save(student));
@@ -32,6 +35,7 @@ public class StudentServiceIml implements StudentService {
         return studentRepository.findById(Id).orElseThrow(StudentNotFoundException::new);
     }
     @Override
+    @Cacheable(value = "students")
     public StudentDTO updateStudent(int studentID, StudentDTO studentDTO) {
         Student studentReq = convertToEntity(studentDTO);
         Student student = getByID(studentID);
@@ -43,6 +47,7 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
+    @CacheEvict(value = "students")
     public Student deleteStudent(int studentID) {
         Student student = getByID(studentID);
         studentRepository.delete(student);
@@ -50,6 +55,7 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
+    @Cacheable(value = "students")
     public List<Student> listStudent() {
         return studentRepository.findAll();
     }
