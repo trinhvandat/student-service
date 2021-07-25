@@ -55,7 +55,6 @@ public class StudentServiceIml implements StudentService {
     }
 
     @Override
-    @Cacheable(value = "students")
     public List<Student> listStudent() {
         return studentRepository.findAll();
     }
