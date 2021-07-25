@@ -1,5 +1,7 @@
 package org.aibless.backendjava.studentservice.model;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
